@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byte Bistro | Smart Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">
+                <h1>Byte Bistro</h1>
+                <div class="tagline">Where Flavors Meet Technology</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#booking">Book Table</a></li>
+                <li><a href="#cart" id="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main>
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1 class="animate-text">Welcome to Byte Bistro</h1>
+                        <p class="animate-text delay-1">Experience dining reimagined with our smart restaurant system</p>
+                        <div class="cta-buttons">
+                            <button class="btn primary animate-text delay-2" id="view-menu-btn">View Menu</button>
+                            <button class="btn secondary animate-text delay-3" id="book-table-btn">Book a Table</button>
+                        </div>
+                    </div>
+                    <div class="hero-image animate-fade-in">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Restaurant interior">
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-card animate-slide-up">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Dynamic Menu</h3>
+                        <p>Our menu prices change throughout the day. Visit during different hours for special deals!</p>
+                    </div>
+                    <div class="feature-card animate-slide-up delay-1">
+                        <i class="fas fa-chair"></i>
+                        <h3>Smart Booking</h3>
+                        <p>Reserve your table in advance to ensure the best dining experience.</p>
+                    </div>
+                    <div class="feature-card animate-slide-up delay-2">
+                        <i class="fas fa-star"></i>
+                        <h3>VIP Experience</h3>
+                        <p>Loyal customers unlock exclusive menu items and special offers.</p>
+                    </div>
+                </div>
+
+                <div class="current-time">
+                    <p>Current Time: <span id="current-time-display"></span></p>
+                    <p id="time-based-message"></p>
+                </div>
+            </section>
+
+            <!-- Menu Section -->
+            <section id="menu" class="section">
+                <h2 class="section-title">Our Menu</h2>
+                <p class="section-description">Prices update based on time of day. Current time: <span id="menu-time-display"></span></p>
+                
+                <div class="menu-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="starters">Starters</button>
+                    <button class="filter-btn" data-filter="mains">Main Course</button>
+                    <button class="filter-btn" data-filter="desserts">Desserts</button>
+                    <button class="filter-btn" data-filter="beverages">Beverages</button>
+                </div>
+                
+                <div class="menu-container" id="menu-items-container">
+                    <!-- Menu items will be dynamically added here -->
+                </div>
+                
+                <div id="vip-menu-teaser" class="hidden">
+                    <h3>Spend ₹1000 or more to unlock our exclusive VIP menu!</h3>
+                </div>
+                
+                <div id="vip-menu" class="hidden">
+                    <h3 class="vip-title">VIP Exclusive Menu</h3>
+                    <div class="vip-menu-items">
+                        <!-- VIP menu items will be added here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Table Booking Section -->
+            <section id="booking" class="section">
+                <h2 class="section-title">Book Your Table</h2>
+                <p class="section-description">Reserve your table before placing an order</p>
+                
+                <div class="booking-container">
+                    <div class="restaurant-layout">
+                        <h3>Restaurant Layout</h3>
+                        <div class="tables-container">
+                            <!-- Tables will be dynamically added here -->
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="table-status available"></div>
+                                <span>Available</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="table-status selected"></div>
+                                <span>Selected</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="table-status occupied"></div>
+                                <span>Occupied</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form">
+                        <h3>Reservation Details</h3>
+                        <form id="table-booking-form">
+                            <div class="form-group">
+                                <label for="customer-name">Your Name</label>
+                                <input type="text" id="customer-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-email">Email</label>
+                                <input type="email" id="customer-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-phone">Phone</label>
+                                <input type="tel" id="customer-phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guests">Number of Guests</label>
+                                <select id="guests" required>
+                                    <option value="1">1 Person</option>
+                                    <option value="2" selected>2 People</option>
+                                    <option value="3">3 People</option>
+                                    <option value="4">4 People</option>
+                                    <option value="5">5 People</option>
+                                    <option value="6">6 People</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking-date">Date</label>
+                                <input type="date" id="booking-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking-time">Time</label>
+                                <input type="time" id="booking-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Selected Table: <span id="selected-table-display">None</span></label>
+                            </div>
+                            <button type="submit" class="btn primary" id="confirm-booking-btn">Confirm Booking</button>
+                        </form>
+                        <div id="booking-message" class="message hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cart Section -->
+            <section id="cart" class="section">
+                <h2 class="section-title">Your Order</h2>
+                
+                <div class="cart-container">
+                    <div id="table-warning" class="warning hidden">
+                        Please book a table before placing your order.
+                    </div>
+                    
+                    <div id="cart-items-container">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="cart-subtotal">₹0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (5%):</span>
+                            <span id="cart-tax">₹0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="cart-total">₹0.00</span>
+                        </div>
+                        
+                        <div class="discount-section">
+                            <div class="form-group">
+                                <label for="discount-code">Discount Code</label>
+                                <div class="discount-input">
+                                    <input type="text" id="discount-code">
+                                    <button id="apply-discount-btn" class="btn secondary">Apply</button>
+                                </div>
+                            </div>
+                            <div id="discount-message" class="message hidden"></div>
+                        </div>
+                        
+                        <button id="proceed-to-payment-btn" class="btn primary">Proceed to Payment</button>
+                    </div>
+                </div>
+                
+                <div id="empty-cart-message" class="empty-message">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                    <button class="btn secondary" id="empty-cart-menu-btn">Browse Menu</button>
+                </div>
+            </section>
+
+            <!-- Payment Section -->
+            <section id="payment" class="section">
+                <h2 class="section-title">Payment</h2>
+                
+                <div class="payment-container">
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div id="payment-items-container">
+                            <!-- Order items will be dynamically added here -->
+                        </div>
+                        <div class="summary-total">
+                            <span>Total Amount:</span>
+                            <span id="payment-total">₹0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-form">
+                        <h3>Payment Details</h3>
+                        <div id="payment-timer">
+                            <p>Session expires in: <span id="payment-countdown">2:00</span></p>
+                        </div>
+                        
+                        <form id="payment-form">
+                            <div class="form-group">
+                                <label for="card-name">Name on Card</label>
+                                <input type="text" id="card-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="card-expiry">Expiry Date</label>
+                                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-cvv">CVV</label>
+                                    <input type="text" id="card-cvv" placeholder="123" maxlength="3" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn primary" id="complete-payment-btn">Complete Payment</button>
+                        </form>
+                        <div id="payment-message" class="message hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Confirmation Section -->
+            <section id="confirmation" class="section">
+                <div class="confirmation-container">
+                    <div class="success-animation">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Order Confirmed!</h2>
+                    <p>Thank you for your order. Your food will be prepared shortly.</p>
+                    <div class="order-details">
+                        <h3>Order Details</h3>
+                        <p>Order #: <span id="order-number"></span></p>
+                        <p>Table #: <span id="order-table"></span></p>
+                        <p>Total Amount: <span id="order-amount"></span></p>
+                    </div>
+                    <button class="btn primary" id="back-to-home-btn">Back to Home</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Byte Bistro</h2>
+                    <p>Where Flavors Meet Technology</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#booking">Book Table</a></li>
+                        <li><a href="#" id="mystery-link">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Digital City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@bytebistro.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Byte Bistro. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Notifications -->
+        <div id="notification" class="notification hidden">
+            <div class="notification-content">
+                <i class="notification-icon"></i>
+                <p id="notification-message"></p>
+            </div>
+            <button id="notification-close"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
