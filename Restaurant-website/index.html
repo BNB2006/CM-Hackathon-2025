@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Byte Bistro | Smart Restaurant</title>
+    <title>Ratatouille | Smart Restaurant</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -12,8 +12,11 @@
         <!-- Navigation -->
         <nav>
             <div class="logo">
-                <h1>Byte Bistro</h1>
+                <img src="logo-img.png" alt="">
+                <div>
+                <h1>Ratatouille</h1>
                 <div class="tagline">Where Flavors Meet Technology</div>
+            </div>
             </div>
             <ul class="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
@@ -23,6 +26,10 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count">0</span>
                 </a></li>
+                <li><button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <span class="sr-only">Toggle theme</span>
+                </button></li>
             </ul>
             <div class="hamburger">
                 <div class="line"></div>
@@ -37,7 +44,7 @@
             <section id="home" class="section active">
                 <div class="hero">
                     <div class="hero-content">
-                        <h1 class="animate-text">Welcome to Byte Bistro</h1>
+                        <h1 class="animate-text">Welcome to Ratatouille</h1>
                         <p class="animate-text delay-1">Experience dining reimagined with our smart restaurant system</p>
                         <div class="cta-buttons">
                             <button class="btn primary animate-text delay-2" id="view-menu-btn">View Menu</button>
@@ -293,8 +300,12 @@
         <footer>
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h2>Byte Bistro</h2>
+                    <h2>Ratatouille</h2>
                     <p>Where Flavors Meet Technology</p>
+
+                    <div class="footer-img">
+                        <img src="footer-img.png" alt="">
+                    </div>
                 </div>
                 <div class="footer-links">
                     <h3>Quick Links</h3>
@@ -309,11 +320,11 @@
                     <h3>Contact Us</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Digital City</p>
                     <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@bytebistro.com</p>
+                    <p><i class="fas fa-envelope"></i> info@ratatouille.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Byte Bistro. All rights reserved.</p>
+                <p>&copy; 2025 Ratatouille. All rights reserved.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
