@@ -323,72 +323,68 @@ function initializeTables() {
 
 // Apply time-based pricing to menu items
 function applyTimePricing() {
-  const now = new Date()
-  const hour = now.getHours()
+  const now = new Date();
+  const hour = now.getHours();
 
-  // Reset all discounts first
+  // Ensure all items have their original price stored
   menuItems.forEach((item) => {
-    item.discount = 0
-    // Don't reset originalPrice here, as we want to keep the pre-refresh price
-  })
+    if (!item.originalPrice) {
+      item.originalPrice = item.price; // Store the original price if not already stored
+    }
+    item.price = item.originalPrice; // Reset the price to the original price before applying discounts
+    item.discount = 0; // Reset the discount
+  });
 
   // Morning discount on beverages (8 AM - 11 AM)
   if (hour >= 8 && hour < 11) {
     menuItems.forEach((item) => {
       if (item.category === "beverages") {
-        if (!item.originalPrice) item.originalPrice = item.price
-        item.price = Math.round(item.price * 0.9) // 10% discount
-        item.discount = 10
+        item.price = Math.round(item.originalPrice * 0.9); // 10% discount
+        item.discount = 10;
       }
-    })
+    });
   }
 
   // Afternoon peak hours (12 PM - 3 PM)
   else if (hour >= 12 && hour < 15) {
     menuItems.forEach((item) => {
-      if (!item.originalPrice) item.originalPrice = item.price
-      item.price = Math.round(item.price * 1.15) // 15% increase
-    })
+      item.price = Math.round(item.originalPrice * 1.15); // 15% increase
+    });
   }
 
   // Evening random discounts (7 PM - 10 PM)
   else if (hour >= 19 && hour < 22) {
-    // Select two random items for discount
-    const availableIndices = menuItems.map((_, index) => index)
+    const availableIndices = menuItems.map((_, index) => index);
     for (let i = 0; i < 2; i++) {
-      if (availableIndices.length === 0) break
+      if (availableIndices.length === 0) break;
 
-      const randomIndex = Math.floor(Math.random() * availableIndices.length)
-      const itemIndex = availableIndices.splice(randomIndex, 1)[0]
+      const randomIndex = Math.floor(Math.random() * availableIndices.length);
+      const itemIndex = availableIndices.splice(randomIndex, 1)[0];
 
-      // Random discount between 5-20%
-      const discountPercent = Math.floor(Math.random() * 16) + 5
-      if (!menuItems[itemIndex].originalPrice) menuItems[itemIndex].originalPrice = menuItems[itemIndex].price
-      menuItems[itemIndex].price = Math.round(menuItems[itemIndex].price * (1 - discountPercent / 100))
-      menuItems[itemIndex].discount = discountPercent
+      const discountPercent = Math.floor(Math.random() * 16) + 5; // Random discount between 5-20%
+      menuItems[itemIndex].price = Math.round(menuItems[itemIndex].originalPrice * (1 - discountPercent / 100));
+      menuItems[itemIndex].discount = discountPercent;
     }
   }
 
   // Late night surge (10 PM - 12 AM)
   else if (hour >= 22 && hour < 24) {
     menuItems.forEach((item) => {
-      if (!item.originalPrice) item.originalPrice = item.price
-      item.price = Math.round(item.price * 1.25) // 25% increase
-    })
+      item.price = Math.round(item.originalPrice * 1.25); // 25% increase
+    });
   }
 
   // Apply anti-bot measure if too many refreshes
   if (refreshCount > 5 && Date.now() - lastRefreshTime < 60000) {
     menuItems.forEach((item) => {
-      if (!item.originalPrice) item.originalPrice = item.price
-      item.price = Math.round(item.price * 1.05) // 5% increase
-    })
+      item.price = Math.round(item.originalPrice * 1.05); // 5% increase
+    });
 
-    showNotification("Anti-bot measure activated: Prices increased by 5% due to frequent page refreshes.", "warning")
+    showNotification("Anti-bot measure activated: Prices increased by 5% due to frequent page refreshes.", "warning");
   }
 
   // Store the updated menu items
-  localStorage.setItem("menuItems", JSON.stringify(menuItems))
+  localStorage.setItem("menuItems", JSON.stringify(menuItems));
 }
 
 // Update time display
