@@ -1036,13 +1036,12 @@ footer {
   margin-top: 3rem;
 }
 
-
-.footer-img{
+.footer-img {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
-.footer-img img{
+.footer-img img {
   width: 120px;
   height: 120px;
   object-fit: cover;
