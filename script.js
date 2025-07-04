@@ -533,6 +533,7 @@ function toggleDarkMode() {
   );
 }
 
+
 // Setup event listeners
 function setupEventListeners() {
   // Home page buttons
@@ -544,6 +545,7 @@ function setupEventListeners() {
       navigateTo("menu");
     });
   }
+
 
   if (bookTableBtn) {
     bookTableBtn.addEventListener("click", () => {
@@ -561,7 +563,6 @@ function setupEventListeners() {
       renderMenu(this.dataset.filter);
     });
   });
-
   
   // Table booking form
   const tableBookingForm = document.getElementById("table-booking-form");
