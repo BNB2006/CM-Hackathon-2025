@@ -551,6 +551,7 @@ function setupEventListeners() {
     });
   }
 
+
   // Menu filter buttons
   const filterBtns = document.querySelectorAll(".filter-btn");
   filterBtns.forEach((btn) => {
@@ -561,6 +562,7 @@ function setupEventListeners() {
     });
   });
 
+  
   // Table booking form
   const tableBookingForm = document.getElementById("table-booking-form");
   if (tableBookingForm) {
